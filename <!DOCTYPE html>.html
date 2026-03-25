@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vision Forward | Glaucoma Care</title>
+    <style>
+        :root {
+            --bg: #02060d;
+            --bg-soft: #08111f;
+            --surface: rgba(13, 22, 37, 0.72);
+            --surface-strong: rgba(17, 28, 46, 0.92);
+            --line: rgba(173, 207, 255, 0.14);
+            --text: #f5f8ff;
+            --muted: #97a7c3;
+            --blue: #7dc3ff;
+            --cyan: #94f1ff;
+            --indigo: #7f8cff;
+            --shadow: 0 32px 90px rgba(0, 0, 0, 0.45);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top, rgba(77, 132, 255, 0.25), transparent 26%),
+                radial-gradient(circle at 85% 20%, rgba(109, 241, 255, 0.14), transparent 18%),
+                linear-gradient(180deg, #040913 0%, #02060d 42%, #07111d 100%);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+            background-size: 120px 120px;
+            mask-image: linear-gradient(180deg, rgba(0,0,0,0.45), transparent 85%);
+            opacity: 0.22;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .page-shell {
+            width: min(1200px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        header {
+            position: sticky;
+            top: 14px;
+            z-index: 50;
+            width: min(1200px, calc(100% - 32px));
+            margin: 14px auto 0;
+            padding: 16px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid var(--line);
+            background: rgba(7, 13, 24, 0.62);
+            backdrop-filter: blur(24px) saturate(140%);
+            border-radius: 999px;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+        }
+
+        .logo {
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(245, 248, 255, 0.94);
+        }
+
+        nav {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.95rem;
+            transition: color 0.25s ease, opacity 0.25s ease;
+        }
+
+        nav a:hover {
+            color: var(--text);
+        }
+
+        .nav-cta {
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(146, 199, 255, 0.22);
+            background: linear-gradient(135deg, rgba(137, 192, 255, 0.18), rgba(125, 140, 255, 0.14));
+            color: var(--text);
+        }
+
+        section {
+            padding: 110px 0;
+        }
+
+        .hero {
+            padding-top: 84px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-stack {
+            display: grid;
+            gap: 30px;
+            justify-items: center;
+            text-align: center;
+        }
+
+        .eyebrow,
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(154, 209, 255, 0.16);
+            background: rgba(11, 19, 34, 0.52);
+            color: #bfd5ff;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            max-width: 980px;
+            font-size: clamp(3.7rem, 8vw, 7.2rem);
+            line-height: 0.95;
+            letter-spacing: -0.06em;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            display: block;
+            background: linear-gradient(180deg, #ffffff 0%, #d6e6ff 54%, #8fc9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-copy {
+            max-width: 720px;
+            color: var(--muted);
+            font-size: 1.22rem;
+            line-height: 1.75;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 170px;
+            padding: 15px 24px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, #8fd3ff 0%, #7d8cff 100%);
+            color: #07111d;
+            box-shadow: 0 18px 40px rgba(125, 140, 255, 0.3);
+        }
+
+        .button-secondary {
+            border: 1px solid rgba(153, 206, 255, 0.18);
+            background: rgba(10, 18, 32, 0.56);
+            color: var(--text);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
+            width: min(1100px, 100%);
+            position: relative;
+            padding: 28px;
+            border-radius: 36px;
+            border: 1px solid var(--line);
+            background: linear-gradient(180deg, rgba(12, 20, 35, 0.92), rgba(6, 11, 22, 0.82));
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .hero-visual::before {
+            content: "";
+            position: absolute;
+            inset: -20% auto auto -10%;
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, rgba(123, 196, 255, 0.28), transparent 70%);
+            filter: blur(10px);
+        }
+
+        .hero-screen {
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid rgba(163, 210, 255, 0.12);
+            background: linear-gradient(180deg, #09111f 0%, #050b15 100%);
+        }
+
+        .hero-screen svg {
+            width: 100%;
+            display: block;
+            aspect-ratio: 16 / 9;
+        }
+
+        .hero-metrics {
+            position: absolute;
+            right: 42px;
+            bottom: 42px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(120px, 1fr));
+            gap: 14px;
+            width: min(460px, calc(100% - 84px));
+        }
+
+        .metric {
+            padding: 16px 18px;
+            border-radius: 22px;
+            border: 1px solid rgba(166, 214, 255, 0.12);
+            background: rgba(10, 18, 33, 0.72);
+            backdrop-filter: blur(20px);
+            text-align: left;
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 1.55rem;
+            letter-spacing: -0.04em;
+            margin-bottom: 6px;
+        }
+
+        .metric span {
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
+            gap: 44px;
+            align-items: center;
+        }
+
+        .content-block h2,
+        .center-heading h2 {
+            font-size: clamp(2.4rem, 4vw, 4.6rem);
+            line-height: 1.02;
+            letter-spacing: -0.05em;
+            margin: 18px 0 20px;
+        }
+
+        .lead {
+            font-size: 1.14rem;
+            line-height: 1.85;
+            color: var(--muted);
+            max-width: 650px;
+        }
+
+        .stacked-copy {
+            display: grid;
+            gap: 16px;
+            margin-top: 22px;
+        }
+
+        .glass-card,
+        .image-card,
+        .treatment-card,
+        .cta-panel {
+            border: 1px solid var(--line);
+            background: linear-gradient(180deg, rgba(12, 20, 34, 0.8), rgba(8, 15, 28, 0.9));
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(22px);
+        }
+
+        .image-card {
+            aspect-ratio: 1;
+            border-radius: 34px;
+            overflow: hidden;
+        }
+
+        .image-card svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .scan-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .scan-grid .glass-card {
+            padding: 22px;
+            border-radius: 24px;
+        }
+
+        .scan-grid strong {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .scan-grid p {
+            color: var(--muted);
+            line-height: 1.65;
+            font-size: 0.96rem;
+        }
+
+        .center-heading {
+            text-align: center;
+            max-width: 850px;
+            margin: 0 auto 36px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            padding: 30px 24px;
+            border-radius: 28px;
+            text-align: left;
+            border: 1px solid var(--line);
+            background: linear-gradient(180deg, rgba(11, 20, 34, 0.84), rgba(7, 14, 26, 0.92));
+            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            line-height: 1;
+            letter-spacing: -0.06em;
+            margin-bottom: 10px;
+            background: linear-gradient(180deg, #ffffff 0%, #8fd4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .treatment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .treatment-card {
+            padding: 28px;
+            border-radius: 28px;
+        }
+
+        .treatment-icon {
+            width: 58px;
+            height: 58px;
+            display: grid;
+            place-items: center;
+            border-radius: 18px;
+            font-size: 1.45rem;
+            background: linear-gradient(135deg, rgba(140, 210, 255, 0.18), rgba(125, 140, 255, 0.24));
+            border: 1px solid rgba(160, 214, 255, 0.16);
+            margin-bottom: 18px;
+        }
+
+        .treatment-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .treatment-card p {
+            color: var(--muted);
+            line-height: 1.72;
+        }
+
+        .cta-panel {
+            padding: 42px;
+            border-radius: 34px;
+            text-align: center;
+            max-width: 980px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-panel::before {
+            content: "";
+            position: absolute;
+            inset: auto 50% -120px auto;
+            width: 360px;
+            height: 360px;
+            transform: translateX(50%);
+            background: radial-gradient(circle, rgba(125, 210, 255, 0.2), transparent 65%);
+        }
+
+        .cta-panel p {
+            color: var(--muted);
+            max-width: 620px;
+            margin: 14px auto 26px;
+            line-height: 1.75;
+            font-size: 1.08rem;
+        }
+
+        footer {
+            padding: 32px 0 54px;
+            text-align: center;
+            color: rgba(151, 167, 195, 0.72);
+            font-size: 0.92rem;
+        }
+
+        @media (max-width: 980px) {
+            header {
+                border-radius: 28px;
+                top: 10px;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 60px;
+            }
+
+            .hero-metrics {
+                position: static;
+                width: 100%;
+                margin-top: 18px;
+            }
+
+            .content-grid,
+            .stats,
+            .treatment-grid,
+            .scan-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            section {
+                padding: 84px 0;
+            }
+
+            .page-shell,
+            header {
+                width: min(100% - 20px, 1200px);
+            }
+
+            header {
+                padding: 14px 18px;
+            }
+
+            .hero-stack {
+                gap: 22px;
+            }
+
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+
+            .hero-copy,
+            .lead,
+            .cta-panel p {
+                font-size: 1rem;
+            }
+
+            .hero-visual {
+                padding: 16px;
+                border-radius: 28px;
+            }
+
+            .hero-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-panel {
+                padding: 32px 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Vision Forward</div>
+        <nav>
+            <a href="#about">Overview</a>
+            <a href="#insight">Vision Loss</a>
+            <a href="#treatment">Treatment</a>
+            <a href="#contact" class="nav-cta">Find Care</a>
+        </nav>
+    </header>
+
+    <main class="page-shell">
+        <section class="hero">
+            <div class="hero-stack">
+                <div class="eyebrow">Future-facing glaucoma education</div>
+                <h1>See pressure.<span>Protect vision.</span></h1>
+                <p class="hero-copy">A more modern way to explain glaucoma: clear visuals, early warning insight, and treatment pathways designed to help patients understand what is happening before vision is lost.</p>
+                <div class="hero-actions">
+                    <a href="#about" class="button button-primary">Explore the science</a>
+                    <a href="#contact" class="button button-secondary">Talk to a specialist</a>
+                </div>
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="hero-screen">
+                        <svg viewBox="0 0 1440 810" role="img">
+                            <defs>
+                                <linearGradient id="panelBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#0b1423" />
+                                    <stop offset="100%" stop-color="#050a14" />
+                                </linearGradient>
+                                <radialGradient id="glowCore" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#89d9ff" />
+                                    <stop offset="45%" stop-color="#5274ff" />
+                                    <stop offset="100%" stop-color="#0a1330" />
+                                </radialGradient>
+                            </defs>
+                            <rect width="1440" height="810" fill="url(#panelBg)" />
+                            <circle cx="490" cy="405" r="210" fill="rgba(129, 196, 255, 0.1)" />
+                            <circle cx="490" cy="405" r="145" fill="url(#glowCore)" />
+                            <circle cx="490" cy="405" r="62" fill="#071021" />
+                            <circle cx="448" cy="352" r="26" fill="rgba(255,255,255,0.42)" />
+                            <ellipse cx="490" cy="405" rx="320" ry="236" fill="none" stroke="rgba(157, 207, 255, 0.12)" stroke-width="2" />
+                            <path d="M720 270 C865 180, 1045 210, 1190 382" fill="none" stroke="#88caff" stroke-width="18" stroke-linecap="round" opacity="0.28" />
+                            <path d="M698 374 L1240 374" fill="none" stroke="#9dd4ff" stroke-width="5" stroke-dasharray="12 14" opacity="0.7" />
+                            <circle cx="1240" cy="374" r="12" fill="#9dd4ff" />
+                            <rect x="914" y="206" width="268" height="104" rx="22" fill="rgba(10,18,33,0.82)" stroke="rgba(164, 214, 255, 0.14)" />
+                            <text x="948" y="250" font-size="20" fill="#95a9ca">Optic nerve</text>
+                            <text x="948" y="286" font-size="34" font-weight="700" fill="#f7fbff">Realtime focus</text>
+                            <rect x="858" y="468" width="324" height="146" rx="28" fill="rgba(8,15,28,0.86)" stroke="rgba(164, 214, 255, 0.14)" />
+                            <text x="892" y="518" font-size="22" fill="#b8c9e4">Peripheral vision monitoring</text>
+                            <path d="M892 560 C952 520, 1002 586, 1058 542 C1092 516, 1132 524, 1162 550" fill="none" stroke="#8dd8ff" stroke-width="6" stroke-linecap="round" />
+                            <circle cx="1004" cy="554" r="8" fill="#8dd8ff" />
+                            <circle cx="1086" cy="538" r="8" fill="#7f8cff" />
+                        </svg>
+                    </div>
+                    <div class="hero-metrics">
+                        <div class="metric">
+                            <strong>Early</strong>
+                            <span>Changes often begin before symptoms are obvious.</span>
+                        </div>
+                        <div class="metric">
+                            <strong>Silent</strong>
+                            <span>Peripheral vision can narrow gradually without warning.</span>
+                        </div>
+                        <div class="metric">
+                            <strong>Actionable</strong>
+                            <span>Monitoring and treatment can slow progression.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="content-grid">
+                <div class="content-block">
+                    <div class="section-label">Eye anatomy</div>
+                    <h2>Glaucoma is damage in motion.</h2>
+                    <p class="lead">It is not just high eye pressure. Glaucoma is a group of diseases that progressively injure the optic nerve, often with few symptoms until permanent vision loss has already started.</p>
+                    <div class="stacked-copy">
+                        <p class="lead">Pressure inside the eye is one major risk factor, but the real clinical concern is how that pressure affects delicate nerve tissue over time.</p>
+                        <p class="lead">That makes regular eye exams, visual field testing, and optic nerve imaging essential for catching disease earlier.</p>
+                    </div>
+                </div>
+                <figure class="image-card" aria-label="High-contrast illustration of the eye and optic nerve in a futuristic diagnostic style">
+                    <svg viewBox="0 0 700 700" role="img">
+                        <defs>
+                            <linearGradient id="shell" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#f7fbff" />
+                                <stop offset="100%" stop-color="#bbd4ff" />
+                            </linearGradient>
+                            <linearGradient id="irisLarge" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#9be8ff" />
+                                <stop offset="100%" stop-color="#5d72ff" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="700" height="700" fill="#07111d" />
+                        <circle cx="350" cy="350" r="250" fill="rgba(130, 197, 255, 0.08)" />
+                        <ellipse cx="300" cy="350" rx="220" ry="165" fill="url(#shell)" />
+                        <circle cx="300" cy="350" r="98" fill="url(#irisLarge)" />
+                        <circle cx="300" cy="350" r="48" fill="#07111d" />
+                        <circle cx="262" cy="304" r="20" fill="rgba(255,255,255,0.65)" />
+                        <path d="M448 278 C530 276, 585 302, 626 350 C586 398, 530 424, 448 422" fill="#ffd8ca" stroke="#f0b19d" stroke-width="10" />
+                        <path d="M474 218 C572 176, 636 194, 672 288" fill="none" stroke="#8dcfff" stroke-width="10" stroke-linecap="round" />
+                        <text x="480" y="204" font-size="28" font-weight="700" fill="#d7ebff">Optic nerve</text>
+                        <path d="M92 186 L170 258" fill="none" stroke="#8dcfff" stroke-width="8" stroke-linecap="round" />
+                        <text x="56" y="172" font-size="24" font-weight="700" fill="#d7ebff">Cornea</text>
+                        <path d="M76 510 L182 456" fill="none" stroke="#8dcfff" stroke-width="8" stroke-linecap="round" />
+                        <text x="46" y="548" font-size="24" font-weight="700" fill="#d7ebff">Pressure zone</text>
+                    </svg>
+                </figure>
+            </div>
+        </section>
+
+        <section id="insight">
+            <div class="content-grid">
+                <figure class="image-card" aria-label="Futuristic visual field rendering showing peripheral vision loss">
+                    <svg viewBox="0 0 700 700" role="img">
+                        <defs>
+                            <radialGradient id="field" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#ffffff" />
+                                <stop offset="10%" stop-color="#cde3ff" />
+                                <stop offset="26%" stop-color="#92d6ff" />
+                                <stop offset="38%" stop-color="#5974ff" />
+                                <stop offset="60%" stop-color="#162750" />
+                                <stop offset="100%" stop-color="#03070d" />
+                            </radialGradient>
+                        </defs>
+                        <rect width="700" height="700" fill="#07111d" />
+                        <circle cx="350" cy="350" r="260" fill="rgba(130, 197, 255, 0.06)" />
+                        <circle cx="350" cy="350" r="236" fill="url(#field)" />
+                        <circle cx="350" cy="350" r="44" fill="#f7fbff" opacity="0.95" />
+                        <circle cx="350" cy="350" r="15" fill="#5670ff" />
+                        <path d="M350 98 L350 164" stroke="rgba(255,255,255,0.72)" stroke-width="4" />
+                        <path d="M350 536 L350 602" stroke="rgba(255,255,255,0.72)" stroke-width="4" />
+                        <path d="M98 350 L164 350" stroke="rgba(255,255,255,0.72)" stroke-width="4" />
+                        <path d="M536 350 L602 350" stroke="rgba(255,255,255,0.72)" stroke-width="4" />
+                        <text x="94" y="112" font-size="28" font-weight="700" fill="#d7ebff">Peripheral vision loss</text>
+                        <text x="136" y="602" font-size="24" fill="#a7bbd8">Central vision may stay clearer until later</text>
+                    </svg>
+                </figure>
+                <div class="content-block">
+                    <div class="section-label">Visual field</div>
+                    <h2>Why glaucoma is called the silent thief of sight.</h2>
+                    <p class="lead">Vision loss often starts at the edges. Patients can feel as though they see normally while the field of view gradually narrows, which is why glaucoma can progress unnoticed.</p>
+                    <div class="scan-grid">
+                        <div class="glass-card">
+                            <strong>Peripheral first</strong>
+                            <p>Damage commonly appears in side vision before affecting central detail.</p>
+                        </div>
+                        <div class="glass-card">
+                            <strong>Slow progression</strong>
+                            <p>Changes can accumulate gradually enough that the brain adapts and masks them.</p>
+                        </div>
+                        <div class="glass-card">
+                            <strong>Testing matters</strong>
+                            <p>Visual fields and optic nerve imaging help reveal loss that patients may not notice.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="treatment">
+            <div class="center-heading">
+                <div class="section-label">Treatment pathways</div>
+                <h2>Modern care is about control, not delay.</h2>
+                <p class="lead">The goal of treatment is to reduce pressure and preserve nerve function. The right plan depends on disease severity, anatomy, response to medication, and long-term monitoring.</p>
+            </div>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Vision preserved with early treatment and follow-up.</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3M+</div>
+                    <div class="stat-label">People affected in the United States.</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50%</div>
+                    <div class="stat-label">Estimated to be unaware they have glaucoma.</div>
+                </div>
+            </div>
+            <div class="treatment-grid">
+                <article class="treatment-card">
+                    <div class="treatment-icon" aria-hidden="true">◉</div>
+                    <h3>Prescription drops</h3>
+                    <p>Often the first-line approach, eye drops lower intraocular pressure and are most effective when taken consistently.</p>
+                </article>
+                <article class="treatment-card">
+                    <div class="treatment-icon" aria-hidden="true">△</div>
+                    <h3>Laser intervention</h3>
+                    <p>Laser procedures can improve drainage and reduce pressure without the recovery burden of larger surgery.</p>
+                </article>
+                <article class="treatment-card">
+                    <div class="treatment-icon" aria-hidden="true">▣</div>
+                    <h3>Surgical management</h3>
+                    <p>For more advanced or difficult cases, surgery creates new drainage pathways to better stabilize pressure over time.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="cta-panel">
+                <div class="section-label">Next step</div>
+                <h2>Ready to protect your vision earlier?</h2>
+                <p>Glaucoma care works best when patients understand the condition before damage becomes permanent. Schedule a comprehensive eye exam and ask about pressure checks, optic nerve imaging, and visual field testing.</p>
+                <a href="mailto:contact@visionforward.com" class="button button-primary">Schedule an appointment</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="page-shell">&copy; 2026 Vision Forward. Educational information only. Not a substitute for medical care.</div>
+    </footer>
+</body>
+</html>
