@@ -3,26 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vision Forward | Glaucoma Care</title>
+    <title>Glaucoma | Clear Vision, Earlier Action</title>
     <style>
         :root {
-            --bg: #02060d;
-            --bg-soft: #08111f;
-            --surface: rgba(13, 22, 37, 0.72);
-            --surface-strong: rgba(17, 28, 46, 0.92);
-            --line: rgba(173, 207, 255, 0.14);
-            --text: #f5f8ff;
-            --muted: #97a7c3;
-            --blue: #7dc3ff;
-            --cyan: #94f1ff;
-            --indigo: #7f8cff;
-            --shadow: 0 32px 90px rgba(0, 0, 0, 0.45);
+            --bg: #f4f7fb;
+            --bg-soft: #edf2f8;
+            --surface: rgba(255, 255, 255, 0.72);
+            --surface-strong: rgba(255, 255, 255, 0.9);
+            --line: rgba(16, 24, 40, 0.08);
+            --line-strong: rgba(16, 24, 40, 0.14);
+            --text: #0c1220;
+            --muted: #5b667a;
+            --blue: #3f7cff;
+            --cyan: #69d8ff;
+            --indigo: #6b57ff;
+            --mint: #79f2d0;
+            --shadow: 0 30px 80px rgba(25, 45, 90, 0.12);
+            --radius-xl: 36px;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --max: 1200px;
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         html {
@@ -30,12 +36,12 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+            font-family: "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             color: var(--text);
             background:
-                radial-gradient(circle at top, rgba(77, 132, 255, 0.25), transparent 26%),
-                radial-gradient(circle at 85% 20%, rgba(109, 241, 255, 0.14), transparent 18%),
-                linear-gradient(180deg, #040913 0%, #02060d 42%, #07111d 100%);
+                radial-gradient(circle at top left, rgba(105, 216, 255, 0.18), transparent 28%),
+                radial-gradient(circle at 85% 10%, rgba(107, 87, 255, 0.14), transparent 26%),
+                linear-gradient(180deg, #f7faff 0%, #eef4fb 45%, #f8fbff 100%);
             overflow-x: hidden;
         }
 
@@ -45,88 +51,121 @@
             inset: 0;
             pointer-events: none;
             background:
-                linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+                linear-gradient(rgba(255, 255, 255, 0.32) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px);
             background-size: 120px 120px;
-            mask-image: linear-gradient(180deg, rgba(0,0,0,0.45), transparent 85%);
-            opacity: 0.22;
+            opacity: 0.26;
+            mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.72), transparent 88%);
         }
 
         a {
             color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
         }
 
         .page-shell {
-            width: min(1200px, calc(100% - 32px));
+            width: min(var(--max), calc(100% - 32px));
             margin: 0 auto;
+        }
+
+        .glass {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            backdrop-filter: blur(22px) saturate(135%);
+            box-shadow: var(--shadow);
+        }
+
+        .section {
+            padding: 96px 0;
         }
 
         header {
             position: sticky;
-            top: 14px;
-            z-index: 50;
-            width: min(1200px, calc(100% - 32px));
-            margin: 14px auto 0;
+            top: 12px;
+            z-index: 30;
+            width: min(var(--max), calc(100% - 32px));
+            margin: 16px auto 0;
             padding: 16px 22px;
+            border-radius: 999px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border: 1px solid var(--line);
-            background: rgba(7, 13, 24, 0.62);
-            backdrop-filter: blur(24px) saturate(140%);
-            border-radius: 999px;
-            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
         }
 
-        .logo {
-            font-size: 1rem;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
             font-weight: 700;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: rgba(245, 248, 255, 0.94);
+            letter-spacing: -0.03em;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--cyan), var(--indigo));
+            box-shadow: 0 10px 24px rgba(80, 118, 255, 0.35);
+            position: relative;
+        }
+
+        .brand-mark::before {
+            content: "";
+            position: absolute;
+            inset: 7px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.82);
         }
 
         nav {
             display: flex;
             gap: 24px;
             align-items: center;
-        }
-
-        nav a {
-            text-decoration: none;
             color: var(--muted);
             font-size: 0.95rem;
-            transition: color 0.25s ease, opacity 0.25s ease;
         }
 
         nav a:hover {
             color: var(--text);
         }
 
-        .nav-cta {
-            padding: 10px 16px;
+        .nav-cta,
+        .button-primary,
+        .button-secondary {
             border-radius: 999px;
-            border: 1px solid rgba(146, 199, 255, 0.22);
-            background: linear-gradient(135deg, rgba(137, 192, 255, 0.18), rgba(125, 140, 255, 0.14));
-            color: var(--text);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
-        section {
-            padding: 110px 0;
+        .nav-cta {
+            padding: 12px 18px;
+            background: linear-gradient(135deg, var(--blue), var(--indigo));
+            color: #fff;
+            box-shadow: 0 16px 34px rgba(76, 104, 255, 0.24);
+        }
+
+        .nav-cta:hover,
+        .button-primary:hover,
+        .button-secondary:hover {
+            transform: translateY(-2px);
         }
 
         .hero {
-            padding-top: 84px;
+            padding-top: 88px;
             min-height: 100vh;
-            display: flex;
+            display: grid;
             align-items: center;
         }
 
-        .hero-stack {
+        .hero-grid {
             display: grid;
-            gap: 30px;
-            justify-items: center;
-            text-align: center;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 34px;
+            align-items: center;
         }
 
         .eyebrow,
@@ -136,288 +175,430 @@
             gap: 10px;
             padding: 10px 14px;
             border-radius: 999px;
-            border: 1px solid rgba(154, 209, 255, 0.16);
-            background: rgba(11, 19, 34, 0.52);
-            color: #bfd5ff;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.18em;
+            font-size: 0.8rem;
             text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: #2550ad;
+            background: rgba(99, 140, 255, 0.08);
+            border: 1px solid rgba(88, 130, 255, 0.14);
+        }
+
+        .hero-copy {
+            padding: 16px 0;
         }
 
         .hero h1 {
-            max-width: 980px;
-            font-size: clamp(3.7rem, 8vw, 7.2rem);
-            line-height: 0.95;
-            letter-spacing: -0.06em;
-            font-weight: 700;
+            margin-top: 22px;
+            font-size: clamp(3.8rem, 8vw, 7rem);
+            line-height: 0.92;
+            letter-spacing: -0.07em;
+            max-width: 10ch;
         }
 
         .hero h1 span {
             display: block;
-            background: linear-gradient(180deg, #ffffff 0%, #d6e6ff 54%, #8fc9ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #66728a;
         }
 
-        .hero-copy {
-            max-width: 720px;
+        .hero p {
+            margin-top: 24px;
+            max-width: 60ch;
             color: var(--muted);
-            font-size: 1.22rem;
-            line-height: 1.75;
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
 
         .hero-actions {
+            margin-top: 30px;
             display: flex;
-            gap: 16px;
+            gap: 14px;
             flex-wrap: wrap;
-            justify-content: center;
         }
 
-        .button {
+        .button-primary,
+        .button-secondary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-width: 170px;
-            padding: 15px 24px;
-            border-radius: 999px;
-            text-decoration: none;
+            padding: 15px 22px;
             font-weight: 600;
-            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
         .button-primary {
-            background: linear-gradient(135deg, #8fd3ff 0%, #7d8cff 100%);
-            color: #07111d;
-            box-shadow: 0 18px 40px rgba(125, 140, 255, 0.3);
+            color: #fff;
+            background: linear-gradient(135deg, var(--blue), var(--indigo));
+            box-shadow: 0 18px 38px rgba(63, 124, 255, 0.24);
         }
 
         .button-secondary {
-            border: 1px solid rgba(153, 206, 255, 0.18);
-            background: rgba(10, 18, 32, 0.56);
-            color: var(--text);
+            background: rgba(255, 255, 255, 0.62);
+            border: 1px solid var(--line-strong);
         }
 
-        .button:hover {
-            transform: translateY(-2px);
+        .hero-notes {
+            margin-top: 28px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .hero-note {
+            padding: 18px;
+            border-radius: var(--radius-md);
+        }
+
+        .hero-note strong {
+            display: block;
+            font-size: 1.3rem;
+            letter-spacing: -0.04em;
+            margin-bottom: 8px;
+        }
+
+        .hero-note span {
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
         .hero-visual {
-            width: min(1100px, 100%);
-            position: relative;
             padding: 28px;
-            border-radius: 36px;
-            border: 1px solid var(--line);
-            background: linear-gradient(180deg, rgba(12, 20, 35, 0.92), rgba(6, 11, 22, 0.82));
-            box-shadow: var(--shadow);
+            border-radius: var(--radius-xl);
+            position: relative;
             overflow: hidden;
+            min-height: 520px;
+            background:
+                radial-gradient(circle at top right, rgba(121, 242, 208, 0.12), transparent 26%),
+                radial-gradient(circle at bottom left, rgba(107, 87, 255, 0.08), transparent 30%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(244, 248, 255, 0.84));
+            color: var(--text);
+            border: 1px solid rgba(16, 24, 40, 0.08);
         }
 
         .hero-visual::before {
             content: "";
             position: absolute;
-            inset: -20% auto auto -10%;
-            width: 280px;
-            height: 280px;
-            background: radial-gradient(circle, rgba(123, 196, 255, 0.28), transparent 70%);
-            filter: blur(10px);
+            inset: 0;
+            background:
+                linear-gradient(rgba(16, 24, 40, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(16, 24, 40, 0.03) 1px, transparent 1px);
+            background-size: 56px 56px;
+            opacity: 0.5;
+            pointer-events: none;
         }
 
-        .hero-screen {
-            border-radius: 28px;
-            overflow: hidden;
-            border: 1px solid rgba(163, 210, 255, 0.12);
-            background: linear-gradient(180deg, #09111f 0%, #050b15 100%);
-        }
-
-        .hero-screen svg {
-            width: 100%;
-            display: block;
-            aspect-ratio: 16 / 9;
-        }
-
-        .hero-metrics {
-            position: absolute;
-            right: 42px;
-            bottom: 42px;
+        .visual-stack {
+            position: relative;
+            z-index: 1;
             display: grid;
-            grid-template-columns: repeat(3, minmax(120px, 1fr));
-            gap: 14px;
-            width: min(460px, calc(100% - 84px));
-        }
-
-        .metric {
-            padding: 16px 18px;
-            border-radius: 22px;
-            border: 1px solid rgba(166, 214, 255, 0.12);
-            background: rgba(10, 18, 33, 0.72);
-            backdrop-filter: blur(20px);
-            text-align: left;
-        }
-
-        .metric strong {
-            display: block;
-            font-size: 1.55rem;
-            letter-spacing: -0.04em;
-            margin-bottom: 6px;
-        }
-
-        .metric span {
-            color: var(--muted);
-            font-size: 0.92rem;
-            line-height: 1.45;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
-            gap: 44px;
-            align-items: center;
-        }
-
-        .content-block h2,
-        .center-heading h2 {
-            font-size: clamp(2.4rem, 4vw, 4.6rem);
-            line-height: 1.02;
-            letter-spacing: -0.05em;
-            margin: 18px 0 20px;
-        }
-
-        .lead {
-            font-size: 1.14rem;
-            line-height: 1.85;
-            color: var(--muted);
-            max-width: 650px;
-        }
-
-        .stacked-copy {
-            display: grid;
-            gap: 16px;
-            margin-top: 22px;
-        }
-
-        .glass-card,
-        .image-card,
-        .treatment-card,
-        .cta-panel {
-            border: 1px solid var(--line);
-            background: linear-gradient(180deg, rgba(12, 20, 34, 0.8), rgba(8, 15, 28, 0.9));
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(22px);
-        }
-
-        .image-card {
-            aspect-ratio: 1;
-            border-radius: 34px;
-            overflow: hidden;
-        }
-
-        .image-card svg {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        .scan-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
             gap: 18px;
-            margin-top: 30px;
+            height: 100%;
         }
 
-        .scan-grid .glass-card {
+        .signal-kicker {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: #5d6b83;
+        }
+
+        .signal-title {
+            font-size: clamp(2.2rem, 4vw, 3.9rem);
+            line-height: 0.95;
+            letter-spacing: -0.06em;
+            max-width: 9ch;
+        }
+
+        .signal-copy {
+            max-width: 46ch;
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .signal-summary {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 18px;
+            align-items: stretch;
+        }
+
+        .signal-panel,
+        .signal-list {
             padding: 22px;
             border-radius: 24px;
+            background: rgba(255, 255, 255, 0.66);
+            border: 1px solid rgba(16, 24, 40, 0.08);
         }
 
-        .scan-grid strong {
+        .signal-panel strong {
             display: block;
-            font-size: 1rem;
-            margin-bottom: 10px;
-        }
-
-        .scan-grid p {
-            color: var(--muted);
-            line-height: 1.65;
-            font-size: 0.96rem;
-        }
-
-        .center-heading {
-            text-align: center;
-            max-width: 850px;
-            margin: 0 auto 36px;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin-bottom: 28px;
-        }
-
-        .stat-card {
-            padding: 30px 24px;
-            border-radius: 28px;
-            text-align: left;
-            border: 1px solid var(--line);
-            background: linear-gradient(180deg, rgba(11, 20, 34, 0.84), rgba(7, 14, 26, 0.92));
-            box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            line-height: 1;
-            letter-spacing: -0.06em;
-            margin-bottom: 10px;
-            background: linear-gradient(180deg, #ffffff 0%, #8fd4ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-label {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        .treatment-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .treatment-card {
-            padding: 28px;
-            border-radius: 28px;
-        }
-
-        .treatment-icon {
-            width: 58px;
-            height: 58px;
-            display: grid;
-            place-items: center;
-            border-radius: 18px;
-            font-size: 1.45rem;
-            background: linear-gradient(135deg, rgba(140, 210, 255, 0.18), rgba(125, 140, 255, 0.24));
-            border: 1px solid rgba(160, 214, 255, 0.16);
-            margin-bottom: 18px;
-        }
-
-        .treatment-card h3 {
-            font-size: 1.2rem;
+            font-size: 0.82rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #52627a;
             margin-bottom: 12px;
         }
 
-        .treatment-card p {
+        .signal-panel p {
+            font-size: 1.35rem;
+            line-height: 1.45;
+            letter-spacing: -0.03em;
+            color: #18253f;
+        }
+
+        .signal-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .signal-line {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(16, 24, 40, 0.08);
+        }
+
+        .signal-line:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .signal-line strong {
+            font-size: 1.55rem;
+            letter-spacing: -0.05em;
+            color: #2550ad;
+        }
+
+        .signal-line span {
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .signal-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .signal-stat {
+            padding: 18px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.68);
+            border: 1px solid rgba(16, 24, 40, 0.08);
+            backdrop-filter: blur(18px);
+        }
+
+        .signal-stat strong {
+            display: block;
+            font-size: 1.6rem;
+            letter-spacing: -0.05em;
+            margin-bottom: 6px;
+        }
+
+        .signal-stat span {
+            display: block;
+            color: var(--muted);
+            line-height: 1.55;
+            font-size: 0.9rem;
+        }
+
+        .section-head {
+            display: grid;
+            gap: 18px;
+            margin-bottom: 34px;
+        }
+
+        .section-head h2 {
+            font-size: clamp(2.3rem, 5vw, 4rem);
+            line-height: 1;
+            letter-spacing: -0.06em;
+            max-width: 11ch;
+        }
+
+        .section-head p {
+            max-width: 64ch;
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .info-grid,
+        .feature-grid,
+        .treatment-grid,
+        .path-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .info-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .feature-grid {
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: stretch;
+        }
+
+        .treatment-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .path-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .card {
+            padding: 28px;
+            border-radius: var(--radius-lg);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            letter-spacing: -0.04em;
+            margin-bottom: 12px;
+        }
+
+        .card p,
+        .card li {
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .card ul {
+            margin-top: 14px;
+            padding-left: 18px;
+        }
+
+        .feature-panel {
+            padding: 34px;
+            border-radius: var(--radius-xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at top right, rgba(121, 242, 208, 0.18), transparent 32%),
+                linear-gradient(135deg, rgba(63, 124, 255, 0.06), rgba(107, 87, 255, 0.1));
+            pointer-events: none;
+        }
+
+        .feature-panel-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-panel h3 {
+            font-size: clamp(2rem, 4vw, 3.4rem);
+            line-height: 0.98;
+            letter-spacing: -0.06em;
+            max-width: 10ch;
+            margin-bottom: 18px;
+        }
+
+        .feature-panel p {
+            max-width: 56ch;
+            color: var(--muted);
+            line-height: 1.85;
+            font-size: 1.02rem;
+        }
+
+        .feature-metrics {
+            margin-top: 28px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .metric-block {
+            padding: 18px;
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.62);
+            border: 1px solid rgba(16, 24, 40, 0.08);
+        }
+
+        .metric-block strong {
+            display: block;
+            font-size: 2rem;
+            letter-spacing: -0.05em;
+            margin-bottom: 6px;
+        }
+
+        .metric-block span {
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 0.92rem;
+        }
+
+        .path-card {
+            padding: 28px;
+            border-radius: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .path-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at top right, rgba(107, 87, 255, 0.08), transparent 34%),
+                linear-gradient(135deg, rgba(63, 124, 255, 0.04), rgba(121, 242, 208, 0.05));
+            pointer-events: none;
+        }
+
+        .path-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .path-number {
+            display: inline-flex;
+            width: 42px;
+            height: 42px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue), var(--indigo));
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 18px;
+            box-shadow: 0 14px 32px rgba(79, 104, 255, 0.2);
+        }
+
+        .path-card h3 {
+            font-size: 1.2rem;
+            letter-spacing: -0.04em;
+            margin-bottom: 10px;
+        }
+
+        .path-card p {
             color: var(--muted);
             line-height: 1.72;
+            margin-bottom: 14px;
+        }
+
+        .path-detail {
+            padding-top: 14px;
+            border-top: 1px solid rgba(16, 24, 40, 0.08);
+            color: #2c3952;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .cta {
+            padding-bottom: 110px;
         }
 
         .cta-panel {
-            padding: 42px;
-            border-radius: 34px;
+            padding: 40px;
+            border-radius: var(--radius-xl);
             text-align: center;
-            max-width: 980px;
-            margin: 0 auto;
             position: relative;
             overflow: hidden;
         }
@@ -425,312 +606,405 @@
         .cta-panel::before {
             content: "";
             position: absolute;
-            inset: auto 50% -120px auto;
-            width: 360px;
-            height: 360px;
+            inset: auto 50% -140px auto;
+            width: 340px;
+            height: 340px;
             transform: translateX(50%);
-            background: radial-gradient(circle, rgba(125, 210, 255, 0.2), transparent 65%);
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(63, 124, 255, 0.18), transparent 68%);
+        }
+
+        .cta-panel > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-panel h2 {
+            margin: 14px auto 16px;
+            max-width: 12ch;
+            font-size: clamp(2.3rem, 5vw, 4.2rem);
+            line-height: 1;
+            letter-spacing: -0.06em;
         }
 
         .cta-panel p {
+            max-width: 58ch;
+            margin: 0 auto;
             color: var(--muted);
-            max-width: 620px;
-            margin: 14px auto 26px;
-            line-height: 1.75;
-            font-size: 1.08rem;
+            line-height: 1.8;
+            font-size: 1.02rem;
+        }
+
+        .cta-actions {
+            margin-top: 28px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
         }
 
         footer {
-            padding: 32px 0 54px;
-            text-align: center;
-            color: rgba(151, 167, 195, 0.72);
-            font-size: 0.92rem;
+            padding: 0 0 44px;
         }
 
-        @media (max-width: 980px) {
-            header {
-                border-radius: 28px;
-                top: 10px;
-            }
+        .footer-card {
+            padding: 28px;
+            border-radius: 28px;
+        }
 
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .footer-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-card p,
+        .footer-card li {
+            color: var(--muted);
+            line-height: 1.75;
+        }
+
+        .footer-card ul {
+            padding-left: 18px;
+        }
+
+        @media (max-width: 1100px) {
             nav {
                 display: none;
             }
 
-            .hero {
-                padding-top: 60px;
-            }
-
-            .hero-metrics {
-                position: static;
-                width: 100%;
-                margin-top: 18px;
-            }
-
-            .content-grid,
-            .stats,
+            .hero-grid,
+            .feature-grid,
+            .footer-grid,
+            .info-grid,
             .treatment-grid,
-            .scan-grid {
+            .path-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .hero-notes {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                min-height: auto;
             }
         }
 
-        @media (max-width: 640px) {
-            section {
-                padding: 84px 0;
+        @media (max-width: 720px) {
+            .section {
+                padding: 78px 0;
             }
 
-            .page-shell,
+            header,
+            .page-shell {
+                width: min(var(--max), calc(100% - 20px));
+            }
+
             header {
-                width: min(100% - 20px, 1200px);
+                padding: 14px 16px;
             }
 
-            header {
-                padding: 14px 18px;
+            .hero {
+                padding-top: 70px;
             }
 
-            .hero-stack {
-                gap: 22px;
+            .hero h1,
+            .section-head h2,
+            .cta-panel h2,
+            .feature-panel h3 {
+                max-width: none;
             }
 
-            .hero h1 {
-                font-size: 3.2rem;
+            .hero-visual,
+            .feature-panel,
+            .cta-panel,
+            .card,
+            .footer-card,
+            .path-card {
+                padding: 22px;
             }
 
-            .hero-copy,
-            .lead,
-            .cta-panel p {
-                font-size: 1rem;
-            }
-
-            .hero-visual {
-                padding: 16px;
-                border-radius: 28px;
-            }
-
-            .hero-metrics {
+            .feature-metrics {
                 grid-template-columns: 1fr;
             }
 
-            .cta-panel {
-                padding: 32px 22px;
+            .signal-summary {
+                grid-template-columns: 1fr;
+            }
+
+            .signal-stats {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">Vision Forward</div>
+    <header class="glass">
+        <a class="brand" href="#top">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>Vision Forward</span>
+        </a>
         <nav>
-            <a href="#about">Overview</a>
-            <a href="#insight">Vision Loss</a>
-            <a href="#treatment">Treatment</a>
-            <a href="#contact" class="nav-cta">Find Care</a>
+            <a href="#overview">Overview</a>
+            <a href="#damage">What Changes</a>
+            <a href="#care">Care Pathway</a>
+            <a href="#sources" class="nav-cta">Resources</a>
         </nav>
     </header>
 
     <main class="page-shell">
-        <section class="hero">
-            <div class="hero-stack">
-                <div class="eyebrow">Future-facing glaucoma education</div>
-                <h1>See pressure.<span>Protect vision.</span></h1>
-                <p class="hero-copy">A more modern way to explain glaucoma: clear visuals, early warning insight, and treatment pathways designed to help patients understand what is happening before vision is lost.</p>
-                <div class="hero-actions">
-                    <a href="#about" class="button button-primary">Explore the science</a>
-                    <a href="#contact" class="button button-secondary">Talk to a specialist</a>
-                </div>
-                <div class="hero-visual" aria-hidden="true">
-                    <div class="hero-screen">
-                        <svg viewBox="0 0 1440 810" role="img">
-                            <defs>
-                                <linearGradient id="panelBg" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#0b1423" />
-                                    <stop offset="100%" stop-color="#050a14" />
-                                </linearGradient>
-                                <radialGradient id="glowCore" cx="50%" cy="50%" r="50%">
-                                    <stop offset="0%" stop-color="#89d9ff" />
-                                    <stop offset="45%" stop-color="#5274ff" />
-                                    <stop offset="100%" stop-color="#0a1330" />
-                                </radialGradient>
-                            </defs>
-                            <rect width="1440" height="810" fill="url(#panelBg)" />
-                            <circle cx="490" cy="405" r="210" fill="rgba(129, 196, 255, 0.1)" />
-                            <circle cx="490" cy="405" r="145" fill="url(#glowCore)" />
-                            <circle cx="490" cy="405" r="62" fill="#071021" />
-                            <circle cx="448" cy="352" r="26" fill="rgba(255,255,255,0.42)" />
-                            <ellipse cx="490" cy="405" rx="320" ry="236" fill="none" stroke="rgba(157, 207, 255, 0.12)" stroke-width="2" />
-                            <path d="M720 270 C865 180, 1045 210, 1190 382" fill="none" stroke="#88caff" stroke-width="18" stroke-linecap="round" opacity="0.28" />
-                            <path d="M698 374 L1240 374" fill="none" stroke="#9dd4ff" stroke-width="5" stroke-dasharray="12 14" opacity="0.7" />
-                            <circle cx="1240" cy="374" r="12" fill="#9dd4ff" />
-                            <rect x="914" y="206" width="268" height="104" rx="22" fill="rgba(10,18,33,0.82)" stroke="rgba(164, 214, 255, 0.14)" />
-                            <text x="948" y="250" font-size="20" fill="#95a9ca">Optic nerve</text>
-                            <text x="948" y="286" font-size="34" font-weight="700" fill="#f7fbff">Realtime focus</text>
-                            <rect x="858" y="468" width="324" height="146" rx="28" fill="rgba(8,15,28,0.86)" stroke="rgba(164, 214, 255, 0.14)" />
-                            <text x="892" y="518" font-size="22" fill="#b8c9e4">Peripheral vision monitoring</text>
-                            <path d="M892 560 C952 520, 1002 586, 1058 542 C1092 516, 1132 524, 1162 550" fill="none" stroke="#8dd8ff" stroke-width="6" stroke-linecap="round" />
-                            <circle cx="1004" cy="554" r="8" fill="#8dd8ff" />
-                            <circle cx="1086" cy="538" r="8" fill="#7f8cff" />
-                        </svg>
+        <section class="hero section" id="top">
+            <div class="hero-grid">
+                <div class="hero-copy">
+                    <div class="eyebrow">Glaucoma, Explained Clearly</div>
+                    <h1>Protect vision.<span>Understand it early.</span></h1>
+                    <p>
+                        Glaucoma is a group of eye diseases that damages the optic nerve, often slowly and with very few early symptoms.
+                        The goal of this page is simple: make the condition easy to understand, visually clear, and less intimidating.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#overview" class="button-primary">Start with the basics</a>
+                        <a href="#care" class="button-secondary">See how it is treated</a>
                     </div>
-                    <div class="hero-metrics">
-                        <div class="metric">
-                            <strong>Early</strong>
-                            <span>Changes often begin before symptoms are obvious.</span>
+                    <div class="hero-notes">
+                        <div class="hero-note glass">
+                            <strong>Often silent</strong>
+                            <span>Early glaucoma may not cause pain or obvious vision changes.</span>
                         </div>
-                        <div class="metric">
-                            <strong>Silent</strong>
-                            <span>Peripheral vision can narrow gradually without warning.</span>
-                        </div>
-                        <div class="metric">
-                            <strong>Actionable</strong>
-                            <span>Monitoring and treatment can slow progression.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="about">
-            <div class="content-grid">
-                <div class="content-block">
-                    <div class="section-label">Eye anatomy</div>
-                    <h2>Glaucoma is damage in motion.</h2>
-                    <p class="lead">It is not just high eye pressure. Glaucoma is a group of diseases that progressively injure the optic nerve, often with few symptoms until permanent vision loss has already started.</p>
-                    <div class="stacked-copy">
-                        <p class="lead">Pressure inside the eye is one major risk factor, but the real clinical concern is how that pressure affects delicate nerve tissue over time.</p>
-                        <p class="lead">That makes regular eye exams, visual field testing, and optic nerve imaging essential for catching disease earlier.</p>
-                    </div>
-                </div>
-                <figure class="image-card" aria-label="High-contrast illustration of the eye and optic nerve in a futuristic diagnostic style">
-                    <svg viewBox="0 0 700 700" role="img">
-                        <defs>
-                            <linearGradient id="shell" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#f7fbff" />
-                                <stop offset="100%" stop-color="#bbd4ff" />
-                            </linearGradient>
-                            <linearGradient id="irisLarge" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#9be8ff" />
-                                <stop offset="100%" stop-color="#5d72ff" />
-                            </linearGradient>
-                        </defs>
-                        <rect width="700" height="700" fill="#07111d" />
-                        <circle cx="350" cy="350" r="250" fill="rgba(130, 197, 255, 0.08)" />
-                        <ellipse cx="300" cy="350" rx="220" ry="165" fill="url(#shell)" />
-                        <circle cx="300" cy="350" r="98" fill="url(#irisLarge)" />
-                        <circle cx="300" cy="350" r="48" fill="#07111d" />
-                        <circle cx="262" cy="304" r="20" fill="rgba(255,255,255,0.65)" />
-                        <path d="M448 278 C530 276, 585 302, 626 350 C586 398, 530 424, 448 422" fill="#ffd8ca" stroke="#f0b19d" stroke-width="10" />
-                        <path d="M474 218 C572 176, 636 194, 672 288" fill="none" stroke="#8dcfff" stroke-width="10" stroke-linecap="round" />
-                        <text x="480" y="204" font-size="28" font-weight="700" fill="#d7ebff">Optic nerve</text>
-                        <path d="M92 186 L170 258" fill="none" stroke="#8dcfff" stroke-width="8" stroke-linecap="round" />
-                        <text x="56" y="172" font-size="24" font-weight="700" fill="#d7ebff">Cornea</text>
-                        <path d="M76 510 L182 456" fill="none" stroke="#8dcfff" stroke-width="8" stroke-linecap="round" />
-                        <text x="46" y="548" font-size="24" font-weight="700" fill="#d7ebff">Pressure zone</text>
-                    </svg>
-                </figure>
-            </div>
-        </section>
-
-        <section id="insight">
-            <div class="content-grid">
-                <figure class="image-card" aria-label="Futuristic visual field rendering showing peripheral vision loss">
-                    <svg viewBox="0 0 700 700" role="img">
-                        <defs>
-                            <radialGradient id="field" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stop-color="#ffffff" />
-                                <stop offset="10%" stop-color="#cde3ff" />
-                                <stop offset="26%" stop-color="#92d6ff" />
-                                <stop offset="38%" stop-color="#5974ff" />
-                                <stop offset="60%" stop-color="#162750" />
-                                <stop offset="100%" stop-color="#03070d" />
-                            </radialGradient>
-                        </defs>
-                        <rect width="700" height="700" fill="#07111d" />
-                        <circle cx="350" cy="350" r="260" fill="rgba(130, 197, 255, 0.06)" />
-                        <circle cx="350" cy="350" r="236" fill="url(#field)" />
-                        <circle cx="350" cy="350" r="44" fill="#f7fbff" opacity="0.95" />
-                        <circle cx="350" cy="350" r="15" fill="#5670ff" />
-                        <path d="M350 98 L350 164" stroke="rgba(255,255,255,0.72)" stroke-width="4" />
-                        <path d="M350 536 L350 602" stroke="rgba(255,255,255,0.72)" stroke-width="4" />
-                        <path d="M98 350 L164 350" stroke="rgba(255,255,255,0.72)" stroke-width="4" />
-                        <path d="M536 350 L602 350" stroke="rgba(255,255,255,0.72)" stroke-width="4" />
-                        <text x="94" y="112" font-size="28" font-weight="700" fill="#d7ebff">Peripheral vision loss</text>
-                        <text x="136" y="602" font-size="24" fill="#a7bbd8">Central vision may stay clearer until later</text>
-                    </svg>
-                </figure>
-                <div class="content-block">
-                    <div class="section-label">Visual field</div>
-                    <h2>Why glaucoma is called the silent thief of sight.</h2>
-                    <p class="lead">Vision loss often starts at the edges. Patients can feel as though they see normally while the field of view gradually narrows, which is why glaucoma can progress unnoticed.</p>
-                    <div class="scan-grid">
-                        <div class="glass-card">
+                        <div class="hero-note glass">
                             <strong>Peripheral first</strong>
-                            <p>Damage commonly appears in side vision before affecting central detail.</p>
+                            <span>Loss of side vision can happen before central vision is affected.</span>
                         </div>
-                        <div class="glass-card">
-                            <strong>Slow progression</strong>
-                            <p>Changes can accumulate gradually enough that the brain adapts and masks them.</p>
+                        <div class="hero-note glass">
+                            <strong>Action helps</strong>
+                            <span>Early diagnosis and treatment can slow or prevent further damage.</span>
                         </div>
-                        <div class="glass-card">
-                            <strong>Testing matters</strong>
-                            <p>Visual fields and optic nerve imaging help reveal loss that patients may not notice.</p>
+                    </div>
+                </div>
+
+                <div class="hero-visual glass">
+                    <div class="visual-stack">
+                        <div class="signal-kicker">Vision Signal Map</div>
+                        <div class="signal-title">Damage can begin before a person feels it.</div>
+                        <p class="signal-copy">
+                            Glaucoma usually develops slowly. That means the most important signals are not dramatic symptoms, but patterns:
+                            pressure, optic nerve change, and visual field loss over time.
+                        </p>
+                        <div class="signal-summary">
+                            <div class="signal-panel">
+                                <strong>Core Idea</strong>
+                                <p>Glaucoma is easier to manage when the disease is tracked early, before vision loss becomes obvious in daily life.</p>
+                            </div>
+                            <div class="signal-list">
+                                <div class="signal-line">
+                                    <strong>01</strong>
+                                    <span>Pressure helps frame risk, but does not define the whole diagnosis.</span>
+                                </div>
+                                <div class="signal-line">
+                                    <strong>02</strong>
+                                    <span>The optic nerve is the tissue doctors are trying to preserve over time.</span>
+                                </div>
+                                <div class="signal-line">
+                                    <strong>03</strong>
+                                    <span>Follow-up matters because progression is often subtle and gradual.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="signal-stats">
+                            <div class="signal-stat">
+                                <strong>Early</strong>
+                                <span>Symptoms may stay quiet even while structural change is beginning.</span>
+                            </div>
+                            <div class="signal-stat">
+                                <strong>Measured</strong>
+                                <span>Exams and repeat testing turn an invisible problem into a trackable one.</span>
+                            </div>
+                            <div class="signal-stat">
+                                <strong>Managed</strong>
+                                <span>Treatment aims to slow damage and protect the vision a person still has.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="treatment">
-            <div class="center-heading">
-                <div class="section-label">Treatment pathways</div>
-                <h2>Modern care is about control, not delay.</h2>
-                <p class="lead">The goal of treatment is to reduce pressure and preserve nerve function. The right plan depends on disease severity, anatomy, response to medication, and long-term monitoring.</p>
+        <section class="section" id="overview">
+            <div class="section-head">
+                <div class="section-label">Overview</div>
+                <h2>What glaucoma actually is.</h2>
+                <p>
+                    Glaucoma is not just "high eye pressure." It is optic nerve damage that can lead to permanent vision loss.
+                    Pressure inside the eye is an important risk factor, but the real concern is how that pressure, blood flow, and anatomy affect nerve tissue over time.
+                </p>
             </div>
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number">85%</div>
-                    <div class="stat-label">Vision preserved with early treatment and follow-up.</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">3M+</div>
-                    <div class="stat-label">People affected in the United States.</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">50%</div>
-                    <div class="stat-label">Estimated to be unaware they have glaucoma.</div>
-                </div>
-            </div>
-            <div class="treatment-grid">
-                <article class="treatment-card">
-                    <div class="treatment-icon" aria-hidden="true">◉</div>
-                    <h3>Prescription drops</h3>
-                    <p>Often the first-line approach, eye drops lower intraocular pressure and are most effective when taken consistently.</p>
+
+            <div class="info-grid">
+                <article class="card glass">
+                    <h3>What is affected</h3>
+                    <p>The optic nerve carries visual information from the eye to the brain. When glaucoma damages that nerve, vision loss cannot be reversed.</p>
                 </article>
-                <article class="treatment-card">
-                    <div class="treatment-icon" aria-hidden="true">△</div>
-                    <h3>Laser intervention</h3>
-                    <p>Laser procedures can improve drainage and reduce pressure without the recovery burden of larger surgery.</p>
+                <article class="card glass">
+                    <h3>Why it is missed</h3>
+                    <p>Symptoms can begin so gradually that people feel normal while vision is already narrowing at the edges.</p>
                 </article>
-                <article class="treatment-card">
-                    <div class="treatment-icon" aria-hidden="true">▣</div>
-                    <h3>Surgical management</h3>
-                    <p>For more advanced or difficult cases, surgery creates new drainage pathways to better stabilize pressure over time.</p>
+                <article class="card glass">
+                    <h3>Why exams matter</h3>
+                    <p>A comprehensive eye exam can find glaucoma before daily vision changes become obvious, which is the best time to act.</p>
                 </article>
             </div>
         </section>
 
-        <section id="contact">
-            <div class="cta-panel">
-                <div class="section-label">Next step</div>
-                <h2>Ready to protect your vision earlier?</h2>
-                <p>Glaucoma care works best when patients understand the condition before damage becomes permanent. Schedule a comprehensive eye exam and ask about pressure checks, optic nerve imaging, and visual field testing.</p>
-                <a href="mailto:contact@visionforward.com" class="button button-primary">Schedule an appointment</a>
+        <section class="section" id="damage">
+            <div class="feature-grid">
+                <div class="feature-panel glass">
+                    <div class="feature-panel-content">
+                        <div class="section-label">What Changes</div>
+                        <h3>The optic nerve is where glaucoma leaves its mark.</h3>
+                        <p>
+                            In glaucoma, damage builds gradually at the back of the eye. That is why doctors pay close attention to the optic nerve's shape,
+                            the retinal nerve fiber layer, and patterns of visual field loss. The condition is usually managed, not cured, so the earlier the pattern is recognized, the better.
+                        </p>
+                        <div class="feature-metrics">
+                            <div class="metric-block">
+                                <strong>1</strong>
+                                <span>Comprehensive dilated eye exam remains the key starting point.</span>
+                            </div>
+                            <div class="metric-block">
+                                <strong>2</strong>
+                                <span>Testing often includes pressure measurement plus visual field and optic nerve evaluation.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <article class="card glass">
+                    <h3>What doctors watch</h3>
+                    <p>Clinicians look for a pattern rather than a single number: optic nerve appearance, retinal nerve fiber changes, pressure trends, and visual field results together.</p>
+                    <ul>
+                        <li>Optic disc structure</li>
+                        <li>Retinal nerve fiber layer thickness</li>
+                        <li>Peripheral vision performance over time</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="care">
+            <div class="section-head">
+                <div class="section-label">Care Pathway</div>
+                <h2>How glaucoma is diagnosed and treated.</h2>
+                <p>
+                    The aim is to reduce ongoing damage, usually by lowering eye pressure and monitoring the optic nerve over time.
+                    Treatment depends on the type and severity of glaucoma, but the logic is consistent: catch it, measure it, and slow it.
+                </p>
+            </div>
+
+            <div class="treatment-grid">
+                <article class="card glass">
+                    <h3>Pressure checks</h3>
+                    <p>Tonometry measures intraocular pressure. It is one part of the picture, not the whole diagnosis.</p>
+                </article>
+                <article class="card glass">
+                    <h3>Visual field testing</h3>
+                    <p>This helps detect side-vision loss that a patient may not notice yet in everyday life.</p>
+                </article>
+                <article class="card glass">
+                    <h3>Imaging and follow-up</h3>
+                    <p>Repeated optic nerve imaging helps track whether the disease appears stable or continues to progress.</p>
+                </article>
+                <article class="card glass">
+                    <h3>Eye drops</h3>
+                    <p>Prescription drops are often used first to reduce eye pressure or improve fluid drainage.</p>
+                </article>
+                <article class="card glass">
+                    <h3>Laser treatment</h3>
+                    <p>Laser procedures can improve outflow and help lower pressure with less recovery than major surgery.</p>
+                </article>
+                <article class="card glass">
+                    <h3>Surgery</h3>
+                    <p>When needed, surgery creates or improves drainage pathways to better protect the optic nerve over time.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-head">
+                <div class="section-label">Disease Course</div>
+                <h2>Three phases that explain how glaucoma is recognized and managed.</h2>
+                <p>
+                    Glaucoma is often easiest to understand as a progression: early disease may be difficult to notice, testing makes change measurable,
+                    and treatment focuses on preserving vision over time.
+                </p>
+            </div>
+
+            <div class="path-grid">
+                <article class="path-card glass">
+                    <div class="path-number">1</div>
+                    <h3>Early Disease Can Be Subtle</h3>
+                    <p>Many patients have no pain and no obvious early symptoms. Vision can seem normal even while damage is beginning in the peripheral field.</p>
+                    <div class="path-detail">Key point: glaucoma may progress before a person notices a meaningful change in daily vision.</div>
+                </article>
+
+                <article class="path-card glass">
+                    <div class="path-number">2</div>
+                    <h3>Testing Makes Change Visible</h3>
+                    <p>Pressure measurements, optic nerve assessment, and visual field testing help convert a silent condition into something clinicians can monitor objectively.</p>
+                    <div class="path-detail">Key point: diagnosis and follow-up usually depend on patterns seen across repeated exams, not on a single finding alone.</div>
+                </article>
+
+                <article class="path-card glass">
+                    <div class="path-number">3</div>
+                    <h3>Long-Term Management Protects Vision</h3>
+                    <p>Treatment is designed to lower risk and slow progression, usually by reducing pressure and following the optic nerve over time.</p>
+                    <div class="path-detail">Key point: the goal is long-term control and stability rather than a one-time cure.</div>
+                </article>
+            </div>
+        </section>
+
+        <section class="cta section">
+            <div class="cta-panel glass">
+                <div class="section-label">Takeaway</div>
+                <h2>Glaucoma is easier to manage when it is found before vision feels different.</h2>
+                <p>
+                    If someone is at risk, has a family history, or has been told their eye pressure is high, the next practical step is a full eye exam with glaucoma-focused testing.
+                    Earlier clarity leads to better decisions.
+                </p>
+                <div class="cta-actions">
+                    <a class="button-primary" href="https://www.nei.nih.gov/index.php/eye-health-information/eye-conditions-and-diseases/glaucoma">Read NEI guidance</a>
+                    <a class="button-secondary" href="#sources">View resources</a>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="page-shell">&copy; 2026 Vision Forward. Educational information only. Not a substitute for medical care.</div>
+    <footer class="page-shell" id="sources">
+        <div class="footer-card glass">
+            <div class="footer-grid">
+                <div>
+                    <h3>Medical context</h3>
+                    <p>
+                        This page presents high-level glaucoma education in a simplified format. It is not a diagnosis tool and does not replace professional eye care.
+                        For patient-facing medical guidance, see the National Eye Institute.
+                    </p>
+                </div>
+                <div>
+                    <h3>Resources</h3>
+                    <p>
+                        This version of the page is intentionally image-free. The visual emphasis comes from hierarchy, spacing, and structured explanation rather than diagrams or photos.
+                    </p>
+                    <ul>
+                        <li><a href="https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma">Glaucoma overview from the National Eye Institute</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
